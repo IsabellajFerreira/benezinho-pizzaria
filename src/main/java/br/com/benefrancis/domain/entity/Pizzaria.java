@@ -3,6 +3,7 @@ package br.com.benefrancis.domain.entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "TB_PIZZARIA")
 public class Pizzaria {
 
     @Id
