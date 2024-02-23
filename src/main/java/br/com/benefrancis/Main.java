@@ -26,7 +26,6 @@ public class Main {
         var manjericao = new Sabor( null, "Manjericao", "Deliciosa pizza de manjericão que fora plantado pelos mais renomados agricultores do Brasil" );
         var frangoComCatupiri = new Sabor( null, "Frango com Catupiri", "O verdadeiro sabor do Catupiri Original faz toda a diferença nesta pizza" );
 
-        Pizzaria pizzaria = new Pizzaria( null, "Dominus" );
 
        // var pizzaDeManjericao = new Produto( null, "Pizza", BigDecimal.valueOf( 59.99 ), manjericao );
        // var pizzaDeFrangoComCatupiri = new Produto( null, "Pizza", BigDecimal.valueOf( 79.99 ), frangoComCatupiri );
@@ -53,17 +52,27 @@ public class Main {
 
         var pizzaDeFrangoComCatupiri =  Produto.builder().nome("Pizza").sabor(frangoComCatupiri).preco(BigDecimal.valueOf(19.99)).opcionais(opicionaisDaSegundaPizza).build();
 
+        var cardapio = new LinkedHashSet<Produto>();
+
+        cardapio.add(pizzaDeFrangoComCatupiri);
+        cardapio.add(pizzaDeManjericao);
+
+       // Pizzaria dominus = new Pizzaria(null, "Dominus", cardapio);
+
+        Pizzaria dominus = Pizzaria.builder().nome("Dominus").cardapio(cardapio).build();
+
+        Pizzaria nona = Pizzaria.builder().nome("Nona Pizzaria LTDA").cardapio(cardapio).build();
+
+
         manager.getTransaction().begin();
 
-        manager.persist( pizzaria );
-
-        manager.persist( pizzaDeManjericao );
-        manager.persist( pizzaDeFrangoComCatupiri );
-
+        manager.persist( dominus );
+        manager.persist( nona );
 
         manager.getTransaction().commit();
 
-        System.out.println( "PIZZARIA: " + pizzaria );
+        System.out.println( "PIZZARIA: " + dominus );
+        System.out.println( "PIZZARIA: " + nona );
 
         System.out.println( "PIZZA:  " + pizzaDeManjericao );
 
